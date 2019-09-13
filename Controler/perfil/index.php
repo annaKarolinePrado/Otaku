@@ -1,1 +1,1 @@
-<p>Bem Vindo <?php $_SESSION['usuario']['nome'] ?></p>
+<p>Bem Vindo </p>

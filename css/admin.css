@@ -1,0 +1,23 @@
+#contato{width: 100%; float: left;}
+#formContato{margin-top: 2%; width: 100%;margin-bottom: 2%; float: left;}
+#btns,select,#legendContato,#formaDecontato,.inputForm,#sexo{width: 90%; margin-left: 5%; float: left; text-align: 
+center;}
+#legendContato{margin-top: 2%;}
+.seleciona{margin-bottom: 2%;}
+.Botao{width: 40%; float: left; margin-top: 2%; padding: 2% 0; border-radius: 7px; color: #000;
+      background-color: #ffcc00; cursor: pointer; border: 2px solid #fff;}
+.Botao:hover{background-color: #ffcc66}
+.Botao2{margin-left: 4%;}
+
+
+select,.inputForm{ padding: 2% 0; margin-top: 2%; border-radius: 7px; background-color: #ffff99}
+
+@media screen and (min-width: 720px){
+  #btns,#formaDecontato,#legendContato,.inputForm,#sexo{width: 70%; margin-left: 15%; float: left; text-align: 
+center;}
+}
+@media screen and (min-width: 1200px){
+   #btns,#formaDecontato,#legendContato,.inputForm,#sexo{width: 50%; margin-left: 25%; float: left; text-align: 
+center;}
+   
+}

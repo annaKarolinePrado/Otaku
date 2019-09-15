@@ -1,4 +1,5 @@
 <?php 
+    include('../../conexao/conexao.php');
     include('../../conexao/validar.php');
 ?>
 <!DOCTYPE html>
@@ -22,7 +23,7 @@
                 <input class="inputForm" name="nome" type="text" placeholder="Nome:" required><br>                    
                 <input class="inputForm" name="login" type="text" placeholder="Login:" required><br>                    
                 <input class="inputForm" name="senha" type="password" placeholder="Senha:" required><br>
-                <label for="id">Usuario</label><br>
+                <label for="id">Perfil</label>
                 <select name="perfilId" id="perfilId">
                     <?php
                         $sql = "SELECT id, descricao FROM perfil";
@@ -45,3 +46,6 @@
         </footer>	
     </body>
 </html>
+<?php
+	mysqli_close($con);
+?>

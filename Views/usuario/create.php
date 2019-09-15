@@ -1,6 +1,5 @@
 <?php 
     include('../../conexao/conexao.php');
-    include('../../conexao/validar.php');
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -10,8 +9,25 @@
     </head>
     <body>
         <header id="topo">
-            <?php include '../cabecalho.php'; 
-            
+            <nav class="menu">    
+                <ul>
+                    <li><a class="index.php" href="http://localhost/Otaku">Início</a></li>
+                    <?php
+                        session_start();
+                        if(@$_SESSION['usuario'] > 0) {                
+                    ?>
+                    <li><a class="perfil" href="http://localhost/Otaku/views/perfil/index.php">Perfil</a></li>
+                    <li><a class="plano" href="http://localhost/Otaku/views/plano/index.php">Plano</a></li>
+                    <li><a class="produtora" href="http://localhost/Otaku/views/produtora/index.php">Produtora</a></li>
+                    <li><a class="usuario" href="http://localhost/Otaku/views/usuario/index.php">Usuario</a></li>
+                    <?php
+                        }
+                    ?>
+                    <li><a class="cadastreSe" href="http://localhost/Otaku/views/usuario/create.php">Cadastre-se</a></li>     
+                    <li><a class="sair" href="http://localhost/Otaku/views/admin/sair.php">Sair</a></li>
+                </ul>
+            </nav>	
+            <?php             
                 @$status = $_GET['status'];
                 if($status  == 1){
                     echo "<p style='width:100%; float:left; text-align:center;'>

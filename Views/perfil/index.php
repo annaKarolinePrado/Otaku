@@ -25,10 +25,10 @@
                     <td class="tableMostrarTd"><?php echo $item['descricao']; ?></td> 
                     <td></td>
                     <td class="tableMostrarTd">
-                        <a href="../../Controller/perfil/update.php?update=<?php echo $item['id'] ?>">Alterar</a>
+                        <a href="update.php?perfilId=<?php echo $item['id'] ?>">Alterar</a>
                     </td>
                     <td>
-                        <a href="../../Controller/perfil/delete.php?delete=<?php echo $item['id'] ?>">Excluir</a>
+                        <a href="../../Controller/perfil/delete.php?perfilId=<?php echo $item['id'] ?>">Excluir</a>
                     </td>
                 </tr>            
             <?php

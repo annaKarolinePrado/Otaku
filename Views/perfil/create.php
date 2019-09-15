@@ -5,14 +5,14 @@
     </head>
     <body>
         <header id="topo">
-        <?php include '../cabecalho.php'; 
-        
-            @$status = $_GET['status'];
-            if($status  == 1){
-                echo "<p style='width:100%; float:left; text-align:center;'>
-                Cadastrado com sucesso.</p>";
-            }
-        ?>			
+            <?php include '../cabecalho.php'; 
+            
+                @$status = $_GET['status'];
+                if($status  == 1){
+                    echo "<p style='width:100%; float:left; text-align:center;'>
+                    Cadastrado com sucesso.</p>";
+                }
+            ?>			
         </header>
         
         <section id="perfi">

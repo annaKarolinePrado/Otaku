@@ -33,7 +33,7 @@
                 }
             ?>
             <div class="divForms">
-                <form action="Controller/login_db.php">
+                <form action="Controller/login_db.php" method="POST">
                     <div class="imgcontainer">
                         <img src="img/avatarLogin.png" alt="Avatar" class="avatar">
                     </div>

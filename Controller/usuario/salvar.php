@@ -3,7 +3,7 @@
 	
 	$nome = $_POST['nome'];	
 	$login = $_POST['login'];	
-	$senha = $_POST['senha'];	
+	$senha = md5($_POST['senha']);	
 	$perfil = $_POST['perfilId'];	
 	
     $sql = "INSERT INTO usuario VALUES (null, '$nome', '$login', '$senha', $perfil)";

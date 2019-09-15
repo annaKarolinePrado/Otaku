@@ -1,5 +1,5 @@
 <?php
-	include('conexao.php');
+	include('conexcao/conexao.php');
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

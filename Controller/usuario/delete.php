@@ -8,16 +8,15 @@
 	</head>
 	<body>
 		<?php
-			$id   = $_POST['id'];
-			$nome = $_POST['nome'];		
+			$id = $_GET['usuarioId'];			
 			
-			$sql = "UPDATE usuario SET nome = '$nome' WHERE id = $id";
+			$sql = "DELETE FROM usuario WHERE id = $id";
 			
 			$query = mysqli_query($con, $sql);
 			if($query) {
-				header('Location: ../../views/usuario/index.php?status=1');
+				header('Location: ../../views/usuario/index.php');
 			} else {
-				header('Location: ../../views/usuario/index.php?status=2');
+					header('Location: ../../views/usuario/index.php');
 			}
 		?>
 	</body>

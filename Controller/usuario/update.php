@@ -9,9 +9,12 @@
 	<body>
 		<?php
 			$id   = $_POST['id'];
-			$nome = $_POST['nome'];		
+			$nome = $_POST['nome'];			
+			$login = $_POST['login'];			
+			$senha = md5($_POST['senha']);			
+			$perfil = $_POST['perfilId'];			
 			
-			$sql = "UPDATE usuario SET nome = '$nome' WHERE id = $id";
+			$sql = "UPDATE usuario SET nome = '$nome', login = '$login', senha = '$senha', perfilId = $perfil WHERE id = $id";
 			
 			$query = mysqli_query($con, $sql);
 			if($query) {

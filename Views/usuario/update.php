@@ -20,18 +20,21 @@
 
         </header>
         <?php
-            $produtoraId = @$_GET['produtoraId'];
-            $sql =  "SELECT * FROM produtora WHERE id = '$produtoraId'";
+            $usuarioId = @$_GET['usuarioId'];
+            $sql =  "SELECT * FROM usuario WHERE id = '$usuarioId'";
             $query = mysqli_query($con, $sql);
             $item = mysqli_fetch_array($query, MYSQLI_ASSOC);
         ?>
 
         <section class="menuAdm">
-            <section id="produtora">
-                <form  id="formPerfil" action="../../Controller/produtora/update.php" method="POST">                    
-                    <h1 id="titulo">Alterar produtora</h1>                
+            <section id="usuario">
+                <form  id="formPerfil" action="../../Controller/usuario/update.php" method="POST">                    
+                    <h1 id="titulo">Alterar usuario</h1>                
                     <input class="inputForm" name="id" type="hidden" value="<?php echo $item['id']; ?>">
                     <input class="inputForm" name="nome" type="text"  required value="<?php echo $item['nome']; ?>">
+                    <input class="inputForm" name="login" type="text"  required value="<?php echo $item['login']; ?>">
+                    <input class="inputForm" name="senha" type="password"  required >
+                    <input class="inputForm" name="perfilId" type="text"  required value="<?php echo $item['perfilId']; ?>">
                     <fieldset id="btns">
                         <button class="Botao" type="reset" >Limpar</button>
                         <button class="Botao Botao2" type="submit" >Alterar</button>

@@ -1,6 +1,7 @@
 <?php
 	session_start();
-	include('../../conexao/conexao.php');
+    include('../../conexao/conexao.php');
+    include('../../conexao/validar.php');
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

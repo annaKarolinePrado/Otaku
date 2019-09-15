@@ -1,3 +1,6 @@
+<?php 
+    include('../../conexao/validar.php');
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>

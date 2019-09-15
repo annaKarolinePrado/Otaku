@@ -11,8 +11,8 @@
 	$obj = mysqli_fetch_array($query, MYSQLI_ASSOC);
 	
 	if ($obj['id'] > 0) {
-		$_SESSION['id'] = $obj['id'];		
-		header('Location: perfil/index.php');
+		$_SESSION['usuario'] = $obj['id'];		
+		header('Location: ../Views/perfil/index.php');
 	} else {
 		header('Location: ../index.php?erro=1');
 	}

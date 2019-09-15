@@ -17,9 +17,23 @@
                 }
             ?>			
         </header>        
-        <section id="produtora">
-            <form  id="formProdutora" action="../../Controller/produtora/salvar.php" method="post">           
+        <section id="usuario">
+            <form  id="formusuario" action="../../Controller/usuario/salvar.php" method="post">                    
                 <input class="inputForm" name="nome" type="text" placeholder="Nome:" required><br>                    
+                <input class="inputForm" name="login" type="text" placeholder="Login:" required><br>                    
+                <input class="inputForm" name="senha" type="password" placeholder="Senha:" required><br>
+                <label for="id">Usuario</label><br>
+                <select name="perfilId" id="perfilId">
+                    <?php
+                        $sql = "SELECT id, descricao FROM perfil";
+                        $query = mysqli_query($con, $sql);
+                        while ($item = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
+                    ?>
+                    <option value="<?php echo $item['id']; ?>"><?php echo $item['descricao']; ?></option>
+                    <?php
+                        }
+                    ?>
+                </select><br><br>                   
                 <fieldset id="btns">
                     <button class="Botao" type="reset" >Linpar</button>
                     <button class="Botao Botao2" type="submit" >Enviar</button>

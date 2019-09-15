@@ -6,13 +6,12 @@
 <html lang="pt-br">
     <head>   
         <meta charset= "utf-8" />
-        <link rel="stylesheet" type="text/css" href="../css/padrao.css"> 
+        <link rel="stylesheet" type="text/css" href="../../css/padrao.css"> 
     </head>
     <body>
         <header id="topo">
             <?php include '../cabecalho.php';?>			
         </header>
-
         <table class="tableMostrar" border="1">
             <tr class="tableMostrarTr">
                 <th><b>Nome</b></th> 

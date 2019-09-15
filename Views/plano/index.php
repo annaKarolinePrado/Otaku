@@ -1,5 +1,4 @@
 <?php
-	session_start();
     include('../../conexao/conexao.php');
     include('../../conexao/validar.php');
 ?>
@@ -7,7 +6,7 @@
 <html lang="pt-br">
     <head>   
         <meta charset= "utf-8" />
-        <link rel="stylesheet" type="text/css" href="../css/padrao.css"> 
+        <link rel="stylesheet" type="text/css" href="../../css/padrao.css"> 
     </head>
     <body>
         <header id="topo">

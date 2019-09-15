@@ -3,7 +3,7 @@
     <head>   
         <meta charset= "utf-8" />
         <link rel="stylesheet" type="text/css" href="css/padrao.css">          
-        <link rel="stylesheet" type="text/css" href="css/login.css">
+        <link rel="stylesheet" type="text/css" href="css/forms.css">
     </head>
     <body>
         <div class="login">            
@@ -32,12 +32,23 @@
             <?php    
                 }
             ?>
-            <p> Login</p>
-            <form action="Controller/login_db.php" method="POST">
-                <input id="email" type="text" name="login" placeholder="Seu email" /><br>
-                <input id="senha" type="password" name="senha" placeholder="senha" /><br/>
-                <button id="btns" type="submit">Logar</button>
-            </form>
+            <div class="divForms">
+                <form action="Controller/login_db.php">
+                    <div class="imgcontainer">
+                        <img src="img/avatarLogin.png" alt="Avatar" class="avatar">
+                    </div>
+                    <div class="container">
+                        <label for="login"><b>Login:</b></label>
+                        <input type="text" placeholder="Digite seu login" name="login" required>
+                        <label for="senha"><b>Senha:</b></label>
+                        <input type="password" placeholder="Digite sua enha" name="senha" required>
+                        <button type="submit">Login</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </body>
+    <footer class="rodape">
+        <?php include 'views/rodape.php'; ?>	
+    </footer>
 </html>

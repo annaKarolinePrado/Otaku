@@ -1,5 +1,4 @@
 <?php
-	session_start();
     include('../../conexao/conexao.php');
     include('../../conexao/validar.php');
 ?>

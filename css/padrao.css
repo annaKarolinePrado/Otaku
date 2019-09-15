@@ -15,7 +15,7 @@ body {margin: 0; font-family: Arial, Helvetica, sans-serif;}
 
 /*rodape*/
 .atendimento{width: 100%; float: Left; color: #fff; text-align: center;  padding: 1% 0;}
-.rodape{ width: 100%; float: left; text-align: center; background-color: #000;}
+.rodape{ width: 100%; float: left; text-align: center; background-color:  #333;}
 .social-icons a{font-size: 1.5em; color: rgba(255,255,255,0.7);	margin-right: 3%;}
 .social-icons a:hover {color: rgb(255,255,255)}
 .copyright{ margin-top: 2%; color: rgba(255,255,255,0.7); margin-bottom:2%; font-size: 0.5em;}

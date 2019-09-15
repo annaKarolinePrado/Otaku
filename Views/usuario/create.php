@@ -6,6 +6,7 @@
 <html lang="pt-br">
     <head>
         <link rel="stylesheet" type="text/css" href="../../css/padrao.css"> 
+        <link rel="stylesheet" type="text/css" href="../../css/forms.css">
     </head>
     <body>
         <header id="topo">
@@ -18,12 +19,16 @@
                 }
             ?>			
         </header>        
-        <section id="usuario">
-            <form  id="formusuario" action="../../Controller/usuario/salvar.php" method="post">                    
-                <input class="inputForm" name="nome" type="text" placeholder="Nome:" required><br>                    
-                <input class="inputForm" name="login" type="text" placeholder="Login:" required><br>                    
+        <section class="divForms">
+            <form  id="formusuario" action="../../Controller/usuario/salvar.php" method="post"> 
+            <div class="container">   
+                <label for="nome"><b>Nome:</b></label>                
+                <input class="inputForm" name="nome" type="text" placeholder="Nome:" required><br>  
+                <label for="login"><b>Login:</b></label>                  
+                <input class="inputForm" name="login" type="text" placeholder="Login:" required><br>   
+                <label for="senha"><b>Senha:</b></label>                 
                 <input class="inputForm" name="senha" type="password" placeholder="Senha:" required><br>
-                <label for="id">Perfil</label>
+                <label for="id">Perfil:</label>
                 <select name="perfilId" id="perfilId">
                     <?php
                         $sql = "SELECT id, descricao FROM perfil";
@@ -39,6 +44,7 @@
                     <button class="Botao" type="reset" >Linpar</button>
                     <button class="Botao Botao2" type="submit" >Enviar</button>
                 </fieldset>
+                    </div>
             </form>
         </section>    
         <footer class="rodape">

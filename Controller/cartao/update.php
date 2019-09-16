@@ -15,7 +15,7 @@
 			$usuarioId = $_POST['usuarioId'];
 			
 			
-			$sql = "UPDATE cartao set titular = '$titular', numero = '$numero', chaveSeguranca = '$chaveSeguranca', usuarioId = '$usuarioId' where id = '$id'";
+			$sql = "UPDATE cartao set titular = '$titular', numero = '$numero', chaveSeguranca = '$chaveSeguranca', usuarioId = '$usuarioId' where id = $id";
 			
 			$query = mysqli_query($con, $sql);
 			if($query) {

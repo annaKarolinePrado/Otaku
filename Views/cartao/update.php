@@ -7,6 +7,7 @@
     <head>   
         <meta charset= "utf-8" />
         <link rel="stylesheet" type="text/css" href="../../css/padrao.css"> 
+        <link rel="stylesheet" type="text/css" href="../../css/forms.css"> 
     </head>
     <body>
         <header id="topo">
@@ -28,7 +29,7 @@
 
         <section class="menuAdm">
             <section id="usuario">
-                <form  id="formPerfil" action="../../Controller/cartao/update.php" method="POST">                    
+                <form  class="divForms" action="../../Controller/cartao/update.php" method="POST">                    
                     <h1 id="titulo">Alterar cartão</h1>                
                     <input class="inputForm" name="id" type="hidden" value="<?php echo $item['id']; ?>">
                     <h1 id="titulo">Titular</h1>  
@@ -37,8 +38,19 @@
                     <input class="inputForm" name="numero" type="text"  required value="<?php echo $item['numero']; ?>">
                     <h1 id="titulo">Chave de segurança</h1>  
                     <input class="inputForm" name="chaveSeguranca" type="text"  required value="<?php echo $item['chaveSeguranca']; ?>">
-                    
-                    <input class="inputForm" name="perfilId" type="text"  required value="<?php echo $item['id']; ?>">
+                    <select name="usuarioId" id=""> 
+                        <?php
+                            $sql =  "SELECT * FROM usuario";
+                            $query = mysqli_query($con, $sql);
+                            while ($itemUsuario = mysqli_fetch_array($query, MYSQLI_ASSOC)){
+                        ?>
+                        <option value="<?php echo $itemUsuario['id']?>" <?php echo $item['usuarioId']== $itemUsuario['id']?'selected':"";?> ?>
+                            <?php echo $itemUsuario['nome']?>
+                        </option>
+                        <?php 
+                            }
+                        ?>                        
+                    </select>
                     <fieldset id="btns">
                         <button class="Botao" type="reset" >Limpar</button>
                         <button class="Botao Botao2" type="submit" >Alterar</button>

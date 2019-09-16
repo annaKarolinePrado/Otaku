@@ -19,6 +19,7 @@
                     <li><a class="produtora" href="http://localhost/Otaku/views/produtora/index.php">Produtora</a></li>
                     <li><a class="usuario" href="http://localhost/Otaku/views/usuario/index.php">Usuario</a></li>
                     <li><a class="usuario" href="http://localhost/Otaku/views/categoria/index.php">Categoria</a></li>
+                    <li><a class="cartao" href="http://localhost/Otaku/views/cartao/index.php">Cartão</a></li>
                     <?php
                         }
                     ?>

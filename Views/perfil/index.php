@@ -13,6 +13,9 @@
         <header id="topo">
             <?php include '../cabecalho.php';?>			
         </header>
+        <button class="novoObjeto" name="nome" type="button" placeholder="Nome:" required >
+            <a href="http://localhost/Otaku/views/perfil/create.php">+ PERFIL</a>
+        </button>
         <div class="rolagem">
             <table class="tableMostrar">
                 <tr class="tableMostrarTr">
@@ -35,12 +38,14 @@
                             </a>
                         </td>
                         <td class="tableMostrarTd acao">
-                            <a href="../../Controller/perfil/delete.php?perfilId=<?php echo $item['id'] ?>">Excluir</a>
+                            <a href="../../Controller/perfil/delete.php?perfilId=<?php echo $item['id'] ?>">
+                                <img class="icones" src="../../img/excluir.png" />
+                            </a>
                         </td>
                     </tr>            
                 <?php
                     }
-                ?>    
+                ?>     
             </table> 
         </div>  
     </body>

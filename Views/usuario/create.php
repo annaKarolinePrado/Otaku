@@ -20,6 +20,7 @@
                     <li><a class="plano" href="http://localhost/Otaku/views/plano/index.php">Plano</a></li>
                     <li><a class="produtora" href="http://localhost/Otaku/views/produtora/index.php">Produtora</a></li>
                     <li><a class="usuario" href="http://localhost/Otaku/views/usuario/index.php">Usuario</a></li>
+                    <li><a class="usuario" href="http://localhost/Otaku/views/categoria/index.php">Categoria</a></li>
                     <?php
                         }
                     ?>
@@ -36,7 +37,8 @@
             ?>			
         </header>        
         <section class="divForms">
-            <form  id="formusuario" action="../../Controller/usuario/salvar.php" method="post"> 
+            <form  id="formusuario" action="../../Controller/usuario/salvar.php" method="post"><br>
+                <h1 id="titulo" align="center">Cadastrar Usuario</h1> 
             <div class="container">   
                 <label for="nome"><b>Nome:</b></label>                
                 <input class="inputForm" name="nome" type="text" placeholder="Nome:" required><br>  
@@ -63,7 +65,7 @@
                     </div>
             </form>
         </section>    
-        <footer class="rodape">
+        <footer class="rodape rodapeUsuario">
             <?php include '../rodape.php'; ?>	
         </footer>	
     </body>

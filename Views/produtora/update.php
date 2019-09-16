@@ -7,6 +7,7 @@
     <head>   
         <meta charset= "utf-8" />
         <link rel="stylesheet" type="text/css" href="../../css/padrao.css"> 
+        <link rel="stylesheet" type="text/css" href="../../css/forms.css"> 
     </head>
     <body>
         <header id="topo">
@@ -17,20 +18,19 @@
                     Atualiado com sucesso.</p>";
                 }
             ?>	
-
         </header>
         <?php
             $produtoraId = @$_GET['produtoraId'];
             $sql =  "SELECT * FROM produtora WHERE id = '$produtoraId'";
             $query = mysqli_query($con, $sql);
             $item = mysqli_fetch_array($query, MYSQLI_ASSOC);
-        ?>
-
+        ?>      
         <section class="menuAdm">
-            <section id="produtora">
-                <form  id="formPerfil" action="../../Controller/produtora/update.php" method="POST">                    
-                    <h1 id="titulo">Alterar produtora</h1>                
+            <section class="divForms">
+                <form  id="formPerfil" action="../../Controller/produtora/update.php" method="POST"><br>                   
+                    <h1 id="titulo" align="center">Alterar produtora</h1>                
                     <input class="inputForm" name="id" type="hidden" value="<?php echo $item['id']; ?>">
+                    <label for="nome"><b>Nome:</b></label> 
                     <input class="inputForm" name="nome" type="text"  required value="<?php echo $item['nome']; ?>">
                     <fieldset id="btns">
                         <button class="Botao" type="reset" >Limpar</button>

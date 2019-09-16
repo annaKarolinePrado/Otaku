@@ -2,10 +2,10 @@
 	session_start();
 	include('../../conexao/conexao.php');
 	
-	$nome = $_POST['nome'];	
+	$numero = $_POST['numero'];	
 	$descricao = $_POST['descricao'];	
 	
-    $sql = "INSERT INTO perfil VALUES (null, ".$nome.",'".$descricao."')";
+    $sql = "INSERT INTO perfil VALUES (null, ".$numero.",'".$descricao."')";
 	$query = mysqli_query($con, $sql);
 	if($query) {
             header('Location: ../../views/perfil/create.php?status=1');

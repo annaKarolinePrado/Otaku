@@ -13,14 +13,17 @@
         <header id="topo">
             <?php include '../cabecalho.php';?>			
         </header>
+        <button class="novoObjeto" name="nome" type="button" placeholder="Nome:" required >
+            <a href="http://localhost/Otaku/views/produtora/create.php">+ PRODUTORA</a>
+        </button> 
         <div class="rolagem">
             <table class="tableMostrar">
                 <tr class="tableMostrarTr">
-                    <th><b>Nome</b></th> 
-                    <th><b>Alterar</b></th> 
-                    <th><b>Excluir</b></th> 
+                    <th><b>Nome:</b></th> 
+                    <th><b>Alterar:</b></th> 
+                    <th><b>Excluir:</b></th> 
                 </tr>
-                <?php
+                <?php 
                     $sql =  "SELECT * FROM produtora";
                     $query = mysqli_query($con, $sql);
                     while ($item = mysqli_fetch_array($query, MYSQLI_ASSOC)){

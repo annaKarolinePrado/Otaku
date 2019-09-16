@@ -11,6 +11,7 @@
                 <li><a class="plano" href="http://localhost/Otaku/views/plano/index.php">Plano</a></li>
                 <li><a class="produtora" href="http://localhost/Otaku/views/produtora/index.php">Produtora</a></li>
                 <li><a class="usuario" href="http://localhost/Otaku/views/usuario/index.php">Usuario</a></li>
+                <li><a class="usuario" href="http://localhost/Otaku/views/categoria/index.php">Categoria</a></li>
                 <li><a class="cadastreSe" href="http://localhost/Otaku/views/usuario/create.php">Cadastre-se</a></li>     
                 <li><a class="sair" href="http://localhost/Otaku/views/admin/sair.php">Sair</a></li>
             </ul>

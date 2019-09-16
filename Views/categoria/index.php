@@ -12,14 +12,17 @@
     <body>
         <header id="topo">
             <?php include '../cabecalho.php';?>			
-        </header>
+        </header>   
+        <button class="novoObjeto" name="nome" type="button" placeholder="Nome:" required >
+            <a href="http://localhost/Otaku/views/categoria/create.php">+ CATEGORIA</a>
+        </button> 
         <div class="rolagem">
             <table class="tableMostrar">
-                    <tr class="tableMostrarTr">
-                        <th><b>Nome:</b></th> 
-                        <th><b>Alterar</b></th> 
-                        <th><b>Excluir</b></th> 
-                    </tr>
+                <tr class="tableMostrarTr">
+                    <th><b>Nome:</b></th> 
+                    <th><b>Alterar</b></th> 
+                    <th><b>Excluir</b></th> 
+                </tr>
                 <?php
                     $sql =  "SELECT * FROM categoria";
                     $query = mysqli_query($con, $sql);

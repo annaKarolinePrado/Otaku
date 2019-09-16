@@ -1,8 +1,10 @@
 table {font-family: arial, sans-serif; border-collapse: collapse; width: 50%; margin-left: 25%;}
+.novoObjeto{width: 15%; margin-left: 25%; background-color: #4CAF50; color: black; margin-top: 1%; margin-bottom: 1%;}
+.novoObjeto a{color: black;}
 td, th {border: 1px solid #dddddd; text-align: left; padding: 8px;}
 tr:nth-child(even) {background-color: #dddddd;}
 
 .icones{width: 30px; height: 30px;}
 .acao{width: 5%; text-align: center;}
 
-.rolagem{ overflow: auto; widows: 100%; height: 500px;}
+.rolagem{ overflow: auto; width: 100%; height: 436px;}

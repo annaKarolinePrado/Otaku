@@ -1,7 +1,6 @@
 <?php
     include('../../conexao/conexao.php');
     include('../../conexao/validar.php');
-    $usuarioLogado = @$_SESSION['usuario'];
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -17,15 +16,6 @@
         <button class="novoObjeto" name="nome" type="button" placeholder="Nome:" required >
             <a href="http://localhost/Otaku/views/perfil/create.php">+ PERFIL</a>
         </button>
-        <div class="tmMax">
-            <img id="imgPerfil" src="../../img/usuario/user<?php echo $usuarioLogado ?>">
-            <?php
-                $sql =  "SELECT usuario.nome FROM usuario WHERE usuario.id =".$usuarioLogado;
-                $query = mysqli_query($con, $sql);
-                while ($item = mysqli_fetch_array($query, MYSQLI_ASSOC)){
-            ?>
-            <b class="tmMax" align="center">Bem vindo <?php echo $item['nome'] ?></b><?php } ?>
-        </div>
         <div class="rolagem">
             <table class="tableMostrar">
                 <tr class="tableMostrarTr">
@@ -35,8 +25,7 @@
                     <th><b>Excluir:</b></th> 
                 </tr>
                 <?php
-                    $sql =  "SELECT perfil.id, perfil.descricao, perfil.nivel FROM perfil INNER JOIN usuario ON (usuario.perfilId = perfil.id) 
-                             WHERE perfil.descricao IN ('Administrador', 'Master') AND usuario.id =".$usuarioLogado;
+                    $sql =  "SELECT * FROM perfil";
                     $query = mysqli_query($con, $sql);
                     while ($item = mysqli_fetch_array($query, MYSQLI_ASSOC)){
                 ?>

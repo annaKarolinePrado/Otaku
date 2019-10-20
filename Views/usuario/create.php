@@ -1,4 +1,5 @@
 <?php 
+    include('../../conexao/validar.php');
     include('../../conexao/conexao.php');
 ?>
 <!DOCTYPE html>
@@ -13,7 +14,6 @@
                 <ul>
                     <li><a class="index.php" href="http://localhost/Otaku">Início</a></li>
                     <?php
-                        session_start();
                         if(@$_SESSION['usuario'] > 0) {                
                     ?>
                     <li><a class="perfil" href="http://localhost/Otaku/views/perfil/index.php">Perfil</a></li>

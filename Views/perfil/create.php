@@ -21,7 +21,11 @@
             <h1 align="center">Cadastro de Perfil</h1><br>
             <form  id="formPerfil" action="../../Controller/perfil/salvar.php" method="post">           
                 <input class="inputForm" name="numero" type="text" placeholder="Numero:" required><br>                     
-                <input class="inputForm" name="descricao" type="text" placeholder="Descrição:" required><br>                     
+                <select class="inputForm" name="descricao">
+                    <option value="Administrador"> Administrador </option>                  
+                    <option value="Master"> Master </option>                  
+                    <option value="Assinante"> Assinante </option> 
+                </select>                 
                 <fieldset id="btns">
                     <button class="Botao" type="reset" >Limpar</button>
                     <button class="Botao Botao2" type="submit" >Enviar</button>

@@ -13,6 +13,9 @@
                 <li><a class="usuario" href="http://localhost/Otaku/views/usuario/index.php">Usuario</a></li>
                 <li><a class="categoria" href="http://localhost/Otaku/views/categoria/index.php">Categoria</a></li>
                 <li><a class="cartao" href="http://localhost/Otaku/views/cartao/index.php">Cartão</a></li>
+                <li><a class="conta" href="http://localhost/Otaku/views/conta/index.php">Conta</a></li>
+                <li><a class="conta" href="http://localhost/Otaku/views/filme/index.php">Conta</a></li>
+                <li><a class="conta" href="http://localhost/Otaku/views/sistema/integracao.php">Integração</a></li>
                 <li><a class="cadastreSe" href="http://localhost/Otaku/views/usuario/create.php">Cadastre-se</a></li>     
                 <li><a class="sair" href="http://localhost/Otaku/views/admin/sair.php">Sair</a></li>
             </ul>

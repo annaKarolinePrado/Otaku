@@ -39,6 +39,8 @@
                     while ($item = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
                         $lista[] = $item;
                     }
+                    //$json_lista = json_encode($lista);
+
                     foreach($lista as $item){
                 ?>
                 <tr class="tableMostrarTr">

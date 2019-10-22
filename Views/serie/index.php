@@ -48,8 +48,7 @@
                             while ($itemCategoria = mysqli_fetch_array($queryCategoria, MYSQLI_ASSOC)){
                                 $categoriaNome = $itemCategoria['nome'];
                             }
-                        ?>
-                        
+                        ?>                        
                         <td class="tableMostrarTd"><?php echo $produtoraNome; ?></td>
                         <td class="tableMostrarTd"><?php echo $categoriaNome; ?></td>
                         <td class="tableMostrarTd"><?php echo $item['GOSTEIID'] == 1?'Sim':'Não'; ?></td>

@@ -37,13 +37,13 @@
                         <td class="tableMostrarTd"><?php echo $item['chaveSeguranca']; ?></td>
                         <?php
                                 $usuarioId = $item['usuarioId'];
-                                $sql =  "SELECT * FROM usuario WHERE id='$usuarioId'";
-                                $queryUsuario = mysqli_query($con, $sql);
+                                $sql_usuario =  "SELECT * FROM usuario WHERE id=$usuarioId";
+                                $queryUsuario = mysqli_query($con, $sql_usuario);
                                 while ($itemUsuario = mysqli_fetch_array($queryUsuario, MYSQLI_ASSOC)){
                                     $nome = $itemUsuario['nome'];
                                 }
                             ?>
-                        <td class="tableMostrarTd"><?php echo $nome; ?></td>
+                        <td class="tableMostrarTd"><?php echo @$nome; ?></td>
                         <td class="tableMostrarTd acao">
                             <a href="update.php?id=<?php echo $item['id'] ?>">
                                 <img class="icones" src="../../img/alterar.png" />

@@ -14,9 +14,11 @@
                 <li><a class="categoria" href="http://localhost/Otaku/views/categoria/index.php">Categoria</a></li>
                 <li><a class="cartao" href="http://localhost/Otaku/views/cartao/index.php">Cartão</a></li>
                 <li><a class="conta" href="http://localhost/Otaku/views/conta/index.php">Conta</a></li>
-                <li><a class="conta" href="http://localhost/Otaku/views/filme/index.php">Filme</a></li>
-                <li><a class="conta" href="http://localhost/Otaku/views/serie/index.php">Série</a></li>
-                <li><a class="conta" href="http://localhost/Otaku/views/sistema/integracao.php">Integração</a></li>
+                <li><a class="filme" href="http://localhost/Otaku/views/filme/index.php">Filme</a></li>
+                <li><a class="serie" href="http://localhost/Otaku/views/serie/index.php">Série</a></li>
+                <li><a class="temporada" href="http://localhost/Otaku/views/temporada/index.php">Temporada</a></li>
+                <li><a class="episodio" href="http://localhost/Otaku/views/episodio/index.php">Episodio</a></li>
+                <li><a class="integracao" href="http://localhost/Otaku/views/sistema/integracao.php">Integração</a></li>
                 <li><a class="cadastreSe" href="http://localhost/Otaku/views/usuario/create.php">Cadastre-se</a></li>     
                 <li><a class="sair" href="http://localhost/Otaku/views/admin/sair.php">Sair</a></li>
             </ul>

@@ -4,7 +4,7 @@ table {font-family: arial, sans-serif; border-collapse: collapse; width: 50%; ma
 td, th {border: 1px solid #dddddd; text-align: left; padding: 8px;}
 tr:nth-child(even) {background-color: #dddddd;}
 
-.icones{width: 30px; height: 30px;}
+.icones{width: 30px; height: 30px; cursor: pointer;}
 .acao{width: 5%; text-align: center;}
 
 .rolagem{ overflow: auto; width: 100%; height: 436px;}

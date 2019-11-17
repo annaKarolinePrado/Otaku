@@ -17,33 +17,15 @@
             <a href="http://localhost/Otaku/views/categoria/create.php">+ CATEGORIA</a>
         </button> 
         <div class="rolagem">
-            <table class="tableMostrar">
+            <table class="tableMostrar" >
+                
+                <tbody id="tableMostrar">
                 <tr class="tableMostrarTr">
                     <th><b>Nome:</b></th> 
                     <th><b>Alterar</b></th> 
                     <th><b>Excluir</b></th> 
                 </tr>
-                <?php
-                    $sql =  "SELECT * FROM categoria";
-                    $query = mysqli_query($con, $sql);
-                    while ($item = mysqli_fetch_array($query, MYSQLI_ASSOC)){
-                ?>
-                    <tr class="tableMostrarTr">
-                        <td class="tableMostrarTd"><?php echo $item['nome']; ?></td>
-                        <td class="tableMostrarTd acao">
-                            <a href="update.php?categoriaId=<?php echo $item['id'] ?>">
-                                <img class="icones" src="../../img/alterar.png" />
-                            </a>
-                        </td>
-                        <td class="tableMostrarTd acao">
-                            <a href="../../Controller/categoria/delete.php?categoriaId=<?php echo $item['id'] ?>">
-                                <img class="icones" src="../../img/excluir.png" />
-                            </a>
-                        </td>
-                    </tr>            
-                <?php
-                    }
-                ?>    
+                </tbody>
             </table>
         </div>   
     </body>
@@ -54,3 +36,68 @@
 <?php
 	mysqli_close($con);
 ?>
+<script  type="text/javascript" >
+    window.onload = function(){
+        populaTela();
+    } 
+    function populaTela(){
+        $(document).ready(function(){
+
+            $.ajax({
+                type:"post",
+                url:'../../Controller/categoria/queryIndex.php',
+                dataType: 'JSON',
+                async: true,
+                data: "{}",
+                success:function(response){  
+                    console.log(response);
+                    var tabela = $('#tableMostrar');
+                    $(".removeTr").each(function() {
+                        $(this).remove();
+                    });
+                    for(var i = 0; i < response.length; i++){                       
+                        var tabela = $('#tableMostrar');
+                        var tr = $("<tr class='removeTr'>"); 
+                        tr.append("<td class='tableMostrarTd'>"+response[i].nome+"</td>");
+                        tr.append("<td class='tableMostrarTd acao' onClick='alterarCategoria("+response[i].id+")'><a><img class='icones' src='../../img/alterar.png'></a></td>");
+                        tr.append("<td class='tableMostrarTd acao' onClick='excluirCategoria("+response[i].id+")'><a><img class='icones' src='../../img/excluir.png'></a></td>");
+                        tabela.append(tr);
+                    }
+                },
+                error:function(){                   
+                    alert("Ocorreu algum problema");                    
+                },
+            });
+        }); 
+    }
+    function alterarCategoria(categoriaId){
+        window.location.href = "update.php?categoriaId="+categoriaId;  
+    }
+    function excluirCategoria(categoriaId){
+        var agree=confirm("deseja deletar esta categoria?");
+
+        if (agree){
+            $(document).ready(function(){
+
+                var nome = $('#nome').val();
+                
+                $.ajax({
+                    type:"post",
+                    url:'../../Controller/categoria/delete.php',
+                    dataType: 'JSON',
+                    async: true,
+                    data: {
+                        "categoriaId": categoriaId 
+                    },
+                    success:function(response){  
+                        console.log(response);
+                        populaTela();
+                    },
+                    error:function(){                   
+                        alert("Não foi possível excluir, tente mais tarde!");                    
+                    },
+                }); 
+            });
+        }
+    }
+</script>

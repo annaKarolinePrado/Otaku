@@ -17,33 +17,12 @@
             <a href="http://localhost/Otaku/views/produtora/create.php">+ PRODUTORA</a>
         </button> 
         <div class="rolagem">
-            <table class="tableMostrar">
+            <table class="tableMostrar" id="tableMostrar">
                 <tr class="tableMostrarTr">
                     <th><b>Nome:</b></th> 
                     <th><b>Alterar:</b></th> 
                     <th><b>Excluir:</b></th> 
                 </tr>
-                <?php 
-                    $sql =  "SELECT * FROM produtora";
-                    $query = mysqli_query($con, $sql);
-                    while ($item = mysqli_fetch_array($query, MYSQLI_ASSOC)){
-                ?>
-                    <tr class="tableMostrarTr">
-                        <td class="tableMostrarTd"><?php echo $item['nome']; ?></td>
-                        <td class="tableMostrarTd acao">
-                            <a href="update.php?produtoraId=<?php echo $item['id'] ?>">
-                                <img class="icones" src="../../img/alterar.png" />
-                            </a>
-                        </td>
-                        <td class="tableMostrarTd acao">
-                            <a href="../../Controller/produtora/delete.php?produtoraId=<?php echo $item['id'] ?>">
-                                <img class="icones" src="../../img/excluir.png" />
-                            </a>
-                        </td>
-                    </tr>            
-                <?php
-                    }
-                ?>    
             </table> 
         </div>  
     </body>
@@ -54,3 +33,66 @@
 <?php
 	mysqli_close($con);
 ?>
+<script  type="text/javascript" >
+    window.onload = function(){
+        populaTela();
+    } 
+    function populaTela(){
+        $(document).ready(function(){
+
+            $.ajax({
+                type:"post",
+                url:'../../Controller/produtora/queryIndex.php',
+                dataType: 'JSON',
+                async: true,
+                data: "{}",
+                success:function(response){  
+                    console.log(response);
+                    var tabela = $('#tableMostrar');
+                    $(".removeTr").each(function() {
+                        $(this).remove();
+                    });
+                    for(var i = 0; i < response.length; i++){                       
+                        var tabela = $('#tableMostrar');
+                        var tr = $("<tr class='removeTr'>"); 
+                        tr.append("<td class='tableMostrarTd'>"+response[i].nome+"</td>");
+                        tr.append("<td class='tableMostrarTd acao' onClick='alterar("+response[i].id+")'><a><img class='icones' src='../../img/alterar.png'></a></td>");
+                        tr.append("<td class='tableMostrarTd acao' onClick='excluir("+response[i].id+")'><a><img class='icones' src='../../img/excluir.png'></a></td>");
+                        tabela.append(tr);
+                    }
+                },
+                error:function(){                   
+                    alert("Ocorreu algum problema");                    
+                },
+            });
+        }); 
+    }
+    function alterar(id){
+        window.location.href = "update.php?produtoraId="+id;  
+    }
+    function excluir(id){
+        var agree=confirm("deseja deletar este registro?");
+
+        if (agree){
+            $(document).ready(function(){
+                
+                $.ajax({
+                    type:"post",
+                    url:'../../Controller/produtora/delete.php',
+                    dataType: 'JSON',
+                    async: true,
+                    data: {
+                        "produtoraId": id 
+                    },
+                    success:function(response){  
+                        console.log(response);
+                        populaTela();
+                    },
+                    error:function(){                   
+                        alert("Não foi possível excluir, tente mais tarde!");                    
+                    },
+                }); 
+            });
+        }
+    }
+</script>

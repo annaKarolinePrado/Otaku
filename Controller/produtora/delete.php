@@ -1,26 +1,16 @@
 <?php
 	include('../../conexao/conexao.php');
-?>
-<!DOCTYPE html>
-<html lang="pt-br">
-	<head>
-		<title></title>
-	</head>
-	<body>
-		<?php
-			$id = $_GET['produtoraId'];			
-			
-			$sql = "DELETE FROM produtora WHERE id = $id";
-			
-			$query = mysqli_query($con, $sql);
-			if($query) {
-				header('Location: ../../views/produtora/index.php');
-			} else {
-					header('Location: ../../views/produtora/index.php');
-			}
-		?>
-	</body>
-</html>
-<?php
+
+	$id = $_POST['produtoraId'];			
+	
+	$sql = "DELETE FROM produtora WHERE id = $id";
+	
+	$query = mysqli_query($con, $sql);
+	if($query) {
+		$response = array("status" => 1);
+	} else {
+		$response = array("status" => 2);
+	}
+	echo json_encode($response);
 	mysqli_close($con);
 ?>

@@ -33,19 +33,6 @@
                     <label for="nome"><b>Nome:</b></label> 
                     <input class="inputForm" name="nome" type="text"  required value="<?php echo $item['NOME']; ?>">
                     <label for="temporadaId"><b>Temporada:</b></label>
-                    <select name="temporadaId" id=""> 
-                        <?php
-                            $sql =  "SELECT * FROM temporada";
-                            $query = mysqli_query($con, $sql);
-                            while ($itemTemporada = mysqli_fetch_array($query, MYSQLI_ASSOC)){
-                        ?>    
-                        <option value="<?php echo $itemTemporada['ID']?>" <?php echo $itemTemporada['ID']== $item['TEMPORADAID']?'selected':"";?> ?>
-                            <?php echo $itemTemporada['NOME']?>
-                        </option>
-                        <?php 
-                            }
-                        ?>                        
-                    </select>
                     <fieldset id="btns">
                         <button class="Botao" type="reset" >Limpar</button>
                         <button class="Botao Botao2" type="submit" >Alterar</button>
@@ -62,3 +49,33 @@
 <?php
 	mysqli_close($con);
 ?>
+<script  type="text/javascript" >
+    window.onload = function(){
+        carregaTemporada();
+    } 
+    function carregaTemporada(){
+        $(document).ready(function(){
+
+            $.ajax({
+                type:"post",
+                url:'../../Controller/temporada/queryIndex.php',
+                dataType: 'JSON',
+                async: true,
+                data: "{}",
+                success:function(response){  
+                    console.log(response);
+                    var combo = $('#temporadaId');
+                    $(".remove").each(function() {
+                        $(this).remove();
+                    });
+                    for(var i = 0; i < response.length; i++){                       
+                        combo.append("<option class='remove' value='"+response[i].id"'>"+response[i].nome+"</option>");
+                    }
+                },
+                error:function(){                   
+                    alert("Ocorreu algum problema");                    
+                },
+            });
+        }); 
+    }
+</script>

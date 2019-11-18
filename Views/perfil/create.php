@@ -19,9 +19,10 @@
         </header>        
         <section class="divForms"><br>
             <h1 align="center">Cadastro de Perfil</h1><br>
-            <form  id="formPerfil" action="../../Controller/perfil/salvar.php" method="post">           
-                <input class="inputForm" name="numero" type="text" placeholder="Numero:" required><br>                     
-                <select class="inputForm" name="descricao">
+            <form  id="formPerfil" action="../../Controller/perfil/salvar.php" method="post">   
+                <label for="nome"><b>Decrição:</b></label>        
+                <input class="inputForm" name="descricao" type="text" placeholder="" required><br>                     
+                <select class="inputForm" name="nivel">
                     <option value="Administrador"> Administrador </option>                  
                     <option value="Master"> Master </option>                  
                     <option value="Assinante"> Assinante </option> 

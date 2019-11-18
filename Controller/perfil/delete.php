@@ -1,26 +1,16 @@
 <?php
 	include('../../conexao/conexao.php');
-?>
-<!DOCTYPE html>
-<html lang="pt-br">
-	<head>
-		<title></title>
-	</head>
-	<body>
-		<?php
-			$id = $_GET['perfilId'];			
-			
-			$sql = "DELETE FROM perfil WHERE id = $id";
-			
-			$query = mysqli_query($con, $sql);
-			if($query) {
-				header('Location: ../../views/perfil/index.php');
-			} else {
-					header('Location: ../../views/perfil/index.php');
-			}
-		?>
-	</body>
-</html>
-<?php
+
+	$id = $_POST['perfilId'];			
+	
+	$sql = "DELETE FROM perfil WHERE id = $id";
+	
+	$query = mysqli_query($con, $sql);
+	if($query) {
+		$response = array("status" => 1);
+	} else {
+		$response = array("status" => 2);
+	}
+	echo json_encode($response);
 	mysqli_close($con);
 ?>

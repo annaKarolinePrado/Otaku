@@ -20,8 +20,8 @@
     </header>
     <body>
         <?php
-            $temporadaId = @$_GET['episodioId'];
-            $sql =  "SELECT * FROM episodio WHERE id = '$episodioId'";
+            $episodioId = @$_GET['episodioId'];
+            $sql =  "SELECT * FROM epsodio WHERE ID = $episodioId";
             $query = mysqli_query($con, $sql);
             $item = mysqli_fetch_array($query, MYSQLI_ASSOC);
         ?>

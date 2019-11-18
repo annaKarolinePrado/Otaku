@@ -24,7 +24,8 @@
             $sql =  "SELECT *   FROM `conta`  where conta.id = $contaId";
             $query = mysqli_query($con, $sql);
             $item = mysqli_fetch_array($query, MYSQLI_ASSOC);
-            $plano = $item['PLANO_ID']
+            $plano = $item['PLANO_ID'];            
+            $cartao = $item['CARTAO_ID'];            
         ?>
         <section class="menuAdm">
             <section class="divForms">
@@ -35,11 +36,11 @@
 
                     <select name="planoId" id=""> 
                         <?php
-                            $sql =  "SELECT * FROM plano";
+                            $sqlPlano =  "SELECT * FROM plano";
                             $queryPlano = mysqli_query($con, $sqlPlano);
                             while ($itemPlano  = mysqli_fetch_array($queryPlano, MYSQLI_ASSOC)){
                         ?>
-                        <option value="<?php echo $itemPlano['id']?>" <?php echo $itemPerfil['id']== $plano?'selected':"";?> ?>
+                        <option value="<?php echo $itemPlano['id']?>" <?php echo $itemPlano['id']== $plano?'selected':"";?> ?>
                             <?php echo $itemPlano['nome']?>
                         </option>
                         <?php 
@@ -49,11 +50,11 @@
 
                     <select name="cartaoId" id=""> 
                         <?php
-                            $sqlCartao =  "SELECT * FROM cartao where";
+                            $sqlCartao =  "SELECT * FROM cartao";
                             $queryCartao = mysqli_query($con, $sqlCartao);
                             while ($itemCartao = mysqli_fetch_array($queryCartao, MYSQLI_ASSOC)){
                         ?>
-                        <option value="<?php echo $itemCartao['id']?>" <?php echo $itemCartao['id']==$plano?'selected':"";?> ?>
+                        <option value="<?php echo $itemCartao['id']?>" <?php echo $itemCartao['id']==$cartao?'selected':"";?> ?>
                             <?php echo $itemCartao['titular']?>
                         </option>
                         <?php 

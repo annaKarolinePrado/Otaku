@@ -17,43 +17,13 @@
             <a href="http://localhost/Otaku/views/episodio/create.php">+ EPISODIO</a>
         </button>
         <div class="rolagem" >
-            <table class="tableMostrar" border="1">
+            <table class="tableMostrar" border="1" id="tableMostrar">
                 <tr class="tableMostrarTr">
                     <th><b>Nome</b></th> 
                     <th><b>Temporada</b></th>
                     <th><b>Alterar</b></th> 
                     <th><b>Excluir</b></th> 
-                </tr>
-                <?php
-                    $sql =  "SELECT * FROM epsodio";
-                    $query = mysqli_query($con, $sql);
-                    while ($item = mysqli_fetch_array($query, MYSQLI_ASSOC)){
-                ?>
-                <tr class="tableMostrarTr" >
-                    <td class="tableMostrarTd"><?php echo $item['NOME']; ?></td>
-                    <?php
-                        $idTemporada = $item['TEMPORADAID'];
-                        $sql_temporada =  "SELECT * FROM temporada WHERE ID=$idTemporada";
-                        $queryTemporada = mysqli_query($con, $sql_temporada);
-                        while ($itemTemporada = mysqli_fetch_array($queryTemporada, MYSQLI_ASSOC)){
-                            $temporada = $itemTemporada['NOME'];
-                        }
-                    ?>
-                    <td class="tableMostrarTd"><?php echo $temporada; ?></td>
-                    <td class="tableMostrarTd acao">
-                        <a href="update.php?episodioId=<?php echo $item['ID'] ?>">
-                            <img class="icones" src="../../img/alterar.png" />
-                        </a>
-                    </td>
-                    <td class="tableMostrarTd acao">
-                        <a href="../../Controller/episodio/delete.php?episodioId=<?php echo $item['ID'] ?>">
-                            <img class="icones" src="../../img/excluir.png" />
-                        </a>
-                    </td>
-                </tr>            
-                <?php
-                    }
-                ?>    
+                </tr>                
             </table>
         </div>   
     </body>
@@ -64,3 +34,67 @@
 <?php
 	mysqli_close($con);
 ?>
+<script  type="text/javascript" >
+    window.onload = function(){
+        populaTela();
+    } 
+    function populaTela(){
+        $(document).ready(function(){
+
+            $.ajax({
+                type:"post",
+                url:'../../Controller/episodio/queryIndex.php',
+                dataType: 'JSON',
+                async: true,
+                data: "{}",
+                success:function(response){  
+                    console.log(response);
+                    var tabela = $('#tableMostrar');
+                    $(".removeTr").each(function() {
+                        $(this).remove();
+                    });
+                    for(var i = 0; i < response.length; i++){                       
+                        var tabela = $('#tableMostrar');
+                        var tr = $("<tr class='removeTr'>"); 
+                        tr.append("<td class='tableMostrarTd'>"+response[i].NOME+"</td>");
+                        tr.append("<td class='tableMostrarTd'>"+response[i].temporada+"</td>");
+                        tr.append("<td class='tableMostrarTd acao' onClick='alterar("+response[i].ID+")'><a><img class='icones' src='../../img/alterar.png'></a></td>");
+                        tr.append("<td class='tableMostrarTd acao' onClick='excluir("+response[i].ID+")'><a><img class='icones' src='../../img/excluir.png'></a></td>");
+                        tabela.append(tr);
+                    }
+                },
+                error:function(){                   
+                    alert("Ocorreu algum problema");                    
+                },
+            });
+        }); 
+    }
+    function alterar(id){
+        window.location.href = "update.php?episodioId="+id;  
+    }
+    function excluir(id){
+        var agree=confirm("deseja deletar este registro?");
+
+        if (agree){
+            $(document).ready(function(){
+                
+                $.ajax({
+                    type:"post",
+                    url:'../../Controller/episodio/delete.php',
+                    dataType: 'JSON',
+                    async: true,
+                    data: {
+                        "episodioId": id 
+                    },
+                    success:function(response){  
+                        console.log(response);
+                        populaTela();
+                    },
+                    error:function(){                   
+                        alert("Não foi possível excluir, tente mais tarde!");                    
+                    },
+                }); 
+            });
+        }
+    }
+</script>

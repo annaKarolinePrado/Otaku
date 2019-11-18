@@ -17,43 +17,14 @@
             <a href="http://localhost/Otaku/views/filme/create.php">+ FILME</a>
         </button> 
         <div class="rolagem" >
-            <table class="tableMostrar">
+            <table class="tableMostrar" id="tableMostrar">
                 <tr class="tableMostrarTr">  
                     <th><b>URL:</b></th> 
                     <th><b>Descrição:</b></th>
-                    <th><b>Data de Lançamento:</b></th> 
-                    <th><b>Produtora:</b></th> 
-                    <th><b>Categoria:</b></th> 
-                    <th><b>Like:</b></th>                     
+                    <th><b>Data de Lançamento:</b></th>                    
                     <th><b>Alterar:</b></th> 
                     <th><b>Excluir:</b></th>
                 </tr>
-                <?php
-                    $sql =  "SELECT * FROM filme";
-                    $query = mysqli_query($con, $sql);
-                    while ($item = mysqli_fetch_array($query, MYSQLI_ASSOC)){
-                ?>
-                <tr class="tableMostrarTr">
-                    <td class="tableMostrarTd"><?php echo $item['NOME']; ?></td>
-                    <td class="tableMostrarTd"><?php echo $item['DURACAO']; ?></td>
-                    <td class="tableMostrarTd"><?php echo date("d/m/Y", strtotime($item['LANCAMENTODATE'])); ?></td>
-                    <td class="tableMostrarTd"><?php echo $item['PRODUTORAID']; ?></td>
-                    <td class="tableMostrarTd"><?php echo $item['CATEGORIAID']; ?></td>
-                    <td class="tableMostrarTd"><?php echo $item['GOSTEI_ID']; ?></td>
-                    <td class="tableMostrarTd acao">
-                        <a href="update.php?planoId=<?php echo $item['ID'] ?>">
-                            <img class="icones" src="../../img/alterar.png" />
-                        </a>
-                    </td>
-                    <td class="tableMostrarTd acao">
-                        <a href="../../Controller/plano/delete.php?planoId=<?php echo $item['ID'] ?>">
-                            <img class="icones" src="../../img/excluir.png" />
-                        </a>
-                    </td>
-                </tr>            
-                <?php
-                    }
-                ?>    
             </table> 
             </div>  
     </body>
@@ -61,6 +32,74 @@
         <?php include '../rodape.php'; ?>	
     </footer>
 </html>
+
+<script  type="text/javascript" >
+    window.onload = function(){
+        populaTela();
+    } 
+    function populaTela(){
+        $(document).ready(function(){
+
+            $.ajax({
+                type:"POST",
+                url:'../../Controller/filme/queryIndex.php',
+                dataType: 'JSON',
+                async: true,
+                data: "{}",
+                success:function(response){  
+                    console.log(response);
+                    var tabela = $('#tableMostrar');
+                    $(".removeTr").each(function() {
+                        $(this).remove();
+                    });
+                    for(var i = 0; i < response.length; i++){                       
+                        var tabela = $('#tableMostrar');
+                        var tr = $("<tr class='removeTr'>"); 
+                        tr.append("<td class='tableMostrarTd'>"+response[i].NOME+"</td>");
+                        tr.append("<td class='tableMostrarTd'>"+response[i].DURACAO+"</td>");
+                        tr.append("<td class='tableMostrarTd'>"+response[i].LANCAMENTODATE+"</td>");
+                        tr.append("<td class='tableMostrarTd acao' onClick='alterar("+response[i].ID+")'><a><img class='icones' src='../../img/alterar.png'></a></td>");
+                        tr.append("<td class='tableMostrarTd acao' onClick='excluir("+response[i].ID+")'><a><img class='icones' src='../../img/excluir.png'></a></td>");
+                        tabela.append(tr);
+                    }
+                },
+                error:function(){                   
+                    alert("Ocorreu algum problema");                    
+                },
+            });
+        }); 
+    }
+    function alterar(id){
+        window.location.href = "update.php?filmeId="+id;  
+    }
+    function excluir(id){
+        var agree=confirm("deseja deletar este registro?");
+
+        if (agree){
+            $(document).ready(function(){
+                
+                $.ajax({
+                    type:"post",
+                    url:'../../Controller/filme/delete.php',
+                    dataType: 'JSON',
+                    async: true,
+                    data: {
+                        "filmeId": id 
+                    },
+                    success:function(response){  
+                        console.log(response);
+                        populaTela();
+                    },
+                    error:function(){                   
+                        alert("Não foi possível excluir, tente mais tarde!");                    
+                    },
+                }); 
+            });
+        }
+    }
+</script>
+
+
 <?php
 	mysqli_close($con);
 ?>

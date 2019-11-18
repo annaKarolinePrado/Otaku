@@ -4,11 +4,10 @@
 	<?php
 		$id = $_POST['id'];	
 		$nome = $_POST['nome'];	
-		$temporada = $_POST['temporada'];	
-		$serie = $_POST['serieId'];				
+		$temporada = $_POST['temporadaId'];						
 		
-		$sql = "UPDATE episodio SET NOME = '$nome', TEMPORADA = $temporada WHERE ID = $id";
-
+		$sql = "UPDATE epsodio SET NOME = '$nome', TEMPORADAID = $temporada WHERE ID = $id";
+		echo  $sql;
 		$query = mysqli_query($con, $sql);
 		
 		if($query) {

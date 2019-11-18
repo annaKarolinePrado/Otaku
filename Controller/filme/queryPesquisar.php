@@ -1,13 +1,12 @@
 <?php
     include('../../conexao/conexao.php');
 
-
-
     $filtro = '';
-    if ($nome[@$_POST['nome'] != '') {
-        $filtro = "and duracao like '%".$nome."%'";
+    if ($_POST['nome'] != '') {
+        $filtro = "and duracao like '%".$_POST['nome']."%'";
     }
     $sql =  "SELECT * FROM filme where 1 = 1 ".$filtro;
+
     $query = mysqli_query($con, $sql);
     
     $lista = [];

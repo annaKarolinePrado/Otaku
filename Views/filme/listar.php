@@ -24,62 +24,25 @@
                 <form  id="formplano" action="" method="post"><br>    
                     <h1 id="titulo" align="center">Pesquisar filme</h1>        
                     <label for="descricao"><b>Descrição:</b></label>
-                    <input class="inputForm" name="duracao" type="text" placeholder="descricao" required><br>
+                    <input class="inputForm" name="duracao"  id="duracao" type="text" placeholder="descricao" required><br>
                     
                     <fieldset id="btns">
                         <button class="Botao" type="reset" >Linpar</button>
-                        <button class="Botao Botao2" id="btnPesquisar" >Pesquisar</button>
+                        <button class="Botao Botao2" type="button" id="btnPesquisar" >Pesquisar</button>
                         
                     </fieldset>
                 </form>
             </section> 
         </div>  
-            <table class="tableMostrar">
+            <table class="tableMostrar" id="tableMostrar">
                 <tr class="tableMostrarTr">  
                     <th><b>URL:</b></th> 
                     <th><b>Descrição:</b></th>
-                    <th><b>Data de Lançamento:</b></th> 
-                    <th><b>Produtora:</b></th> 
-                    <th><b>Categoria:</b></th> 
-                    <th><b>Like:</b></th>                     
+                    <th><b>Data de Lançamento:</b></th>                                  
                     <th><b>Alterar:</b></th> 
                     <th><b>Excluir:</b></th>
                 </tr>
-                <?php
-                    $filtro = '';
-                    if ($nome != '') {
-                        $filtro = "and duracao like '%".$nome."%'";
-                    }
-                    $sql =  "SELECT * FROM filme where 1 = 1 ".$filtro;
-                    $query = mysqli_query($con, $sql);
-                    while ($item = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
-                        $lista[] = $item;
-                    }
-                    //$json_lista = json_encode($lista);
-
-                    foreach($lista as $item){
-                ?>
-                <tr class="tableMostrarTr">
-                    <td class="tableMostrarTd"><?php echo $item['NOME']; ?></td>
-                    <td class="tableMostrarTd"><?php echo $item['DURACAO']; ?></td>
-                    <td class="tableMostrarTd"><?php echo date("d/m/Y", strtotime($item['LANCAMENTODATE'])); ?></td>
-                    <td class="tableMostrarTd"><?php echo $item['PRODUTORAID']; ?></td>
-                    <td class="tableMostrarTd"><?php echo $item['CATEGORIAID']; ?></td>
-                    <td class="tableMostrarTd"><?php echo $item['GOSTEI_ID']; ?></td>
-                    <td class="tableMostrarTd acao">
-                        <a href="update.php?planoId=<?php echo $item['ID'] ?>">
-                            <img class="icones" src="../../img/alterar.png" />
-                        </a>
-                    </td>
-                    <td class="tableMostrarTd acao">
-                        <a href="../../Controller/plano/delete.php?planoId=<?php echo $item['ID'] ?>">
-                            <img class="icones" src="../../img/excluir.png" />
-                        </a>
-                    </td>
-                </tr>            
-                <?php
-                    }
-                ?>    
+                  
             </table> 
             </div>  
     </body>
@@ -93,32 +56,38 @@
 
 <script  type="text/javascript" >
     window.onload = function(){
-        $("#btnPesquisar").click(
-            populaTela();
-        )};
+        $("#btnPesquisar").click(function(){
+            pesquisarFilme();
+        });
         
     } 
-    function populaTela(){
+    function pesquisarFilme(){
         $(document).ready(function(){
-
+            var nome = $("#duracao").val();
+            console.log(nome);
             $.ajax({
                 type:"post",
-                url:'../../Controller/categoria/queryIndex.php',
+                url:'../../Controller/filme/queryPesquisar.php',
                 dataType: 'JSON',
                 async: true,
-                data: "{}",
+                data: {
+                    "nome":nome
+                },
                 success:function(response){  
+
                     console.log(response);
                     var tabela = $('#tableMostrar');
-                    $(".removeTr").each(function() {
+                    $(".remove").each(function() {
                         $(this).remove();
                     });
                     for(var i = 0; i < response.length; i++){                       
                         var tabela = $('#tableMostrar');
-                        var tr = $("<tr class='removeTr'>"); 
-                        tr.append("<td class='tableMostrarTd'>"+response[i].nome+"</td>");
-                        tr.append("<td class='tableMostrarTd acao' onClick='alterarCategoria("+response[i].id+")'><a><img class='icones' src='../../img/alterar.png'></a></td>");
-                        tr.append("<td class='tableMostrarTd acao' onClick='excluirCategoria("+response[i].id+")'><a><img class='icones' src='../../img/excluir.png'></a></td>");
+                        var tr = $("<tr class='remove'>"); 
+                        tr.append("<td class='tableMostrarTd'>"+response[i].NOME+"</td>");
+                        tr.append("<td class='tableMostrarTd'>"+response[i].DURACAO+"</td>");
+                        tr.append("<td class='tableMostrarTd'>"+response[i].LANCAMENTODATE+"</td>");
+                        tr.append("<td class='tableMostrarTd acao' onClick='alterar("+response[i].id+")'><a><img class='icones' src='../../img/alterar.png'></a></td>");
+                        tr.append("<td class='tableMostrarTd acao' onClick='excluir("+response[i].id+")'><a><img class='icones' src='../../img/excluir.png'></a></td>");
                         tabela.append(tr);
                     }
                 },
@@ -128,11 +97,11 @@
             });
         }); 
     }
-    function alterarCategoria(categoriaId){
-        window.location.href = "update.php?categoriaId="+categoriaId;  
+    function alterar(id){
+        window.location.href = "update.php?filmeId="+id;  
     }
-    function excluirCategoria(categoriaId){
-        var agree=confirm("deseja deletar esta categoria?");
+    function exclui(id){
+        var agree=confirm("deseja deletar este registro?");
 
         if (agree){
             $(document).ready(function(){
@@ -145,7 +114,7 @@
                     dataType: 'JSON',
                     async: true,
                     data: {
-                        "categoriaId": categoriaId 
+                        "filmeId": id 
                     },
                     success:function(response){  
                         console.log(response);

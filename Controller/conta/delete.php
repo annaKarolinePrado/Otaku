@@ -10,7 +10,7 @@
 		<?php
 			$id = $_GET['planoId'];			
 			
-			$sql = "DELETE FROM plano WHERE id = $id";
+			$sql = "DELETE FROM conta WHERE id = $id";
 			
 			$query = mysqli_query($con, $sql);
 			if($query) {

@@ -14,38 +14,17 @@
             <?php include '../cabecalho.php';?>			
         </header>
         <button class="novoObjeto" name="nome" type="button" placeholder="Nome:" required >
-            <a href="http://localhost/Otaku/views/perfil/create.php">+ PERFIL</a>
+            <a href="http://localhost/Otaku/views/conta/create.php">+ CONTA</a>
         </button>
         <div class="rolagem">
-            <table class="tableMostrar">
+            <table class="tableMostrar" id="tableMostrar">
                 <tr class="tableMostrarTr">
-                    <th><b>Nome:</b></th> 
-                    <th><b>Decrição:</b></th>
+                    <th><b>Plano:</b></th> 
+                    <th><b>Cartao:</b></th>
                     <th><b>Alterar:</b></th> 
                     <th><b>Excluir:</b></th> 
                 </tr>
-                <?php
-                    $sql =  "SELECT * FROM perfil";
-                    $query = mysqli_query($con, $sql);
-                    while ($item = mysqli_fetch_array($query, MYSQLI_ASSOC)){
-                ?>
-                    <tr class="tableMostrarTr">
-                        <td class="tableMostrarTd"><?php echo $item['nivel']; ?></td>
-                        <td class="tableMostrarTd"><?php echo $item['descricao']; ?></td>
-                        <td class="tableMostrarTd acao">
-                            <a href="update.php?perfilId=<?php echo $item['id'] ?>">
-                                <img class="icones" src="../../img/alterar.png" />
-                            </a>
-                        </td>
-                        <td class="tableMostrarTd acao">
-                            <a href="../../Controller/perfil/delete.php?perfilId=<?php echo $item['id'] ?>">
-                                <img class="icones" src="../../img/excluir.png" />
-                            </a>
-                        </td>
-                    </tr>            
-                <?php
-                    }
-                ?>     
+                 
             </table> 
         </div>  
     </body>
@@ -56,3 +35,67 @@
 <?php
 	mysqli_close($con);
 ?>
+<script  type="text/javascript" >
+    window.onload = function(){
+        populaTela();
+    } 
+    function populaTela(){
+        $(document).ready(function(){
+
+            $.ajax({
+                type:"post",
+                url:'../../Controller/conta/queryIndex.php',
+                dataType: 'JSON',
+                async: true,
+                data: "{}",
+                success:function(response){  
+                    console.log(response);
+                    var tabela = $('#tableMostrar');
+                    $(".removeTr").each(function() {
+                        $(this).remove();
+                    });
+                    for(var i = 0; i < response.length; i++){                       
+                        var tabela = $('#tableMostrar');
+                        var tr = $("<tr class='removeTr'>"); 
+                        tr.append("<td class='tableMostrarTd'>"+response[i].plano+"</td>");
+                        tr.append("<td class='tableMostrarTd'>"+response[i].cartao+"</td>");
+                        tr.append("<td class='tableMostrarTd acao' onClick='alterar("+response[i].id+")'><a><img class='icones' src='../../img/alterar.png'></a></td>");
+                        tr.append("<td class='tableMostrarTd acao' onClick='excluir("+response[i].id+")'><a><img class='icones' src='../../img/excluir.png'></a></td>");
+                        tabela.append(tr);
+                    }
+                },
+                error:function(){                   
+                    alert("Ocorreu algum problema");                    
+                },
+            });
+        }); 
+    }
+    function alterar(id){
+        window.location.href = "update.php?contaId="+id;  
+    }
+    function excluir(id){
+        var agree=confirm("deseja deletar este registro?");
+
+        if (agree){
+            $(document).ready(function(){
+                
+                $.ajax({
+                    type:"post",
+                    url:'../../Controller/conta/delete.php',
+                    dataType: 'JSON',
+                    async: true,
+                    data: {
+                        "contaId": id 
+                    },
+                    success:function(response){  
+                        console.log(response);
+                        populaTela();
+                    },
+                    error:function(){                   
+                        alert("Não foi possível excluir, tente mais tarde!");                    
+                    },
+                }); 
+            });
+        }
+    }
+</script>

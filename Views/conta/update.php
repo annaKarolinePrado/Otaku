@@ -20,19 +20,47 @@
             ?>	
         </header>  
         <?php
-            $perfilId = @$_GET['perfilId'];
-            $sql =  "SELECT * FROM perfil WHERE id = '$perfilId'";
+            $contaId = @$_GET['contaId'];
+            $sql =  "SELECT *   FROM `conta`  where conta.id = $contaId";
             $query = mysqli_query($con, $sql);
             $item = mysqli_fetch_array($query, MYSQLI_ASSOC);
+            $plano = $item['PLANO_ID']
         ?>
         <section class="menuAdm">
             <section class="divForms">
-                <form  id="formPerfil" action="../../Controller/perfil/update.php" method="POST">                    
-                    <h1 id="titulo">Alterar perfil</h1>                
-                    <input class="inputForm" name="id" type="hidden" value="<?php echo $item['id']; ?>">
-                    <input class="inputForm" name="nivel" type="text"  required value="<?php echo $item['nivel']; ?>">            
-                    <input class="inputForm" name="descricao" type="text"  required value="<?php echo $item['descricao']; ?>"> 
-                    <fieldset id="btns">
+                <form  id="formPerfil" action="../../Controller/conta/update.php" method="POST">                    
+                    <h1 id="titulo">Alterar Conta</h1>                
+                    <input class="inputForm" name="id" type="hidden" value="<?php echo $item['ID']; ?>">
+
+
+                    <select name="planoId" id=""> 
+                        <?php
+                            $sql =  "SELECT * FROM plano";
+                            $queryPlano = mysqli_query($con, $sqlPlano);
+                            while ($itemPlano  = mysqli_fetch_array($queryPlano, MYSQLI_ASSOC)){
+                        ?>
+                        <option value="<?php echo $itemPlano['id']?>" <?php echo $itemPerfil['id']== $plano?'selected':"";?> ?>
+                            <?php echo $itemPlano['nome']?>
+                        </option>
+                        <?php 
+                            }
+                        ?>                        
+                    </select> 
+
+                    <select name="cartaoId" id=""> 
+                        <?php
+                            $sqlCartao =  "SELECT * FROM cartao where";
+                            $queryCartao = mysqli_query($con, $sqlCartao);
+                            while ($itemCartao = mysqli_fetch_array($queryCartao, MYSQLI_ASSOC)){
+                        ?>
+                        <option value="<?php echo $itemCartao['id']?>" <?php echo $itemCartao['id']==$plano?'selected':"";?> ?>
+                            <?php echo $itemCartao['titular']?>
+                        </option>
+                        <?php 
+                            }
+                        ?>                        
+                    </select>  
+                     <fieldset id="btns">
                         <button class="Botao" type="reset" >Limpar</button>
                         <button class="Botao Botao2" type="submit" >Alterar</button>
                         <a href=""></a>

@@ -22,8 +22,8 @@
             <section id="plano">
                 <form  id="formplano" action="listar.php" method="post"><br>    
                     <h1 id="titulo" align="center">Pesquisar filme</h1>        
-                    <label for="descricao"><b>Descrição:</b></label>
-                    <input class="inputForm" name="duracao" type="text" placeholder="descricao" required><br>
+                    <label for="descricao"><b>Duração:</b></label>
+                    <input class="inputForm" name="duracao" type="text" placeholder="" required><br>
                     
                     <fieldset id="btns">
                         <button class="Botao" type="reset" >Linpar</button>

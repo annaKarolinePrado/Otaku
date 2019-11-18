@@ -27,8 +27,7 @@
             $plano = $item['PLANO_ID'];            
             $cartao = $item['CARTAO_ID'];            
         ?>
-        <section class="menuAdm">
-        <input type="hidden" value="<?php echo $item['PLANO_ID']; ?>">
+        <section class="menuAdm"> 
             <section class="divForms">
                 <form  id="formPerfil" action="../../Controller/conta/update.php" method="POST">                    
                     <h1 id="titulo">Alterar Conta</h1>                
@@ -36,7 +35,17 @@
 
 
                     <select name="planoId" id=""> 
-                                              
+                        <?php
+                            $sqlPlano =  "SELECT * FROM plano";
+                            $queryPlano = mysqli_query($con, $sqlPlano);
+                            while ($itemPlano  = mysqli_fetch_array($queryPlano, MYSQLI_ASSOC)){
+                        ?>
+                        <option value="<?php echo $itemPlano['id']?>" <?php echo $itemPlano['id']== $plano?'selected':"";?> ?>
+                            <?php echo $itemPlano['nome']?>
+                        </option>
+                        <?php 
+                            }
+                        ?>                        
                     </select> 
 
                     <select name="cartaoId" id=""> 
@@ -68,59 +77,3 @@
 <?php
 	mysqli_close($con);
 ?>
-<script  type="text/javascript" >
-    window.onload = function(){
-        carregaPlano();
-    } 
-    function carregaPlano(){
-        $(document).ready(function(){
-
-            $.ajax({
-                type:"post",
-                url:'../../Controller/plano/queryIndex.php',
-                dataType: 'JSON',
-                async: true,
-                data: "{}",
-                success:function(response){  
-                    console.log(response);
-                    var combo = $('#planoId');
-                    $(".remove").each(function() {
-                        $(this).remove();
-                    });
-                    for(var i = 0; i < response.length; i++){                       
-                        combo.append("<option class='remove' value='"+response[i].id"'>"+response[i].nome+"</option>");
-                    }
-                },
-                error:function(){                   
-                    alert("Ocorreu algum problema");                    
-                },
-            });
-        }); 
-    }
-    function carregaCartao(){
-        $(document).ready(function(){
-
-            $.ajax({
-                type:"post",
-                url:'../../Controller/cartao/queryIndex.php',
-                dataType: 'JSON',
-                async: true,
-                data: "{}",
-                success:function(response){  
-                    console.log(response);
-                    var combo = $('#cartaoId');
-                    $(".remove").each(function() {
-                        $(this).remove();
-                    });
-                    for(var i = 0; i < response.length; i++){                       
-                        combo.append("<option class='remove' value='"+response[i].id"'>"+response[i].nome+"</option>");
-                    }
-                },
-                error:function(){                   
-                    alert("Ocorreu algum problema");                    
-                },
-            });
-        }); 
-    }
-    
-</script>

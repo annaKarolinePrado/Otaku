@@ -9,6 +9,7 @@
         <meta charset= "utf-8" />
         <link rel="stylesheet" type="text/css" href="../../css/padrao.css"> 
         <link rel="stylesheet" type="text/css" href="../../css/listagem.css"> 
+        <link rel="stylesheet" type="text/css" href="../../css/forms.css"> 
     </head>
     <header id="topo">
         <?php include '../cabecalho.php';?>			
@@ -18,6 +19,21 @@
             <a href="http://localhost/Otaku/views/filme/create.php">+ FILME</a>
         </button> 
         <div class="rolagem" >
+        <div class="divForms" > 
+            <section id="plano">
+                <form  id="formplano" action="" method="post"><br>    
+                    <h1 id="titulo" align="center">Pesquisar filme</h1>        
+                    <label for="descricao"><b>Descrição:</b></label>
+                    <input class="inputForm" name="duracao" type="text" placeholder="descricao" required><br>
+                    
+                    <fieldset id="btns">
+                        <button class="Botao" type="reset" >Linpar</button>
+                        <button class="Botao Botao2" id="btnPesquisar" >Pesquisar</button>
+                        
+                    </fieldset>
+                </form>
+            </section> 
+        </div>  
             <table class="tableMostrar">
                 <tr class="tableMostrarTr">  
                     <th><b>URL:</b></th> 
@@ -74,3 +90,72 @@
 <?php
 	mysqli_close($con);
 ?>
+
+<script  type="text/javascript" >
+    window.onload = function(){
+        $("#btnPesquisar").click(
+            populaTela();
+        )};
+        
+    } 
+    function populaTela(){
+        $(document).ready(function(){
+
+            $.ajax({
+                type:"post",
+                url:'../../Controller/categoria/queryIndex.php',
+                dataType: 'JSON',
+                async: true,
+                data: "{}",
+                success:function(response){  
+                    console.log(response);
+                    var tabela = $('#tableMostrar');
+                    $(".removeTr").each(function() {
+                        $(this).remove();
+                    });
+                    for(var i = 0; i < response.length; i++){                       
+                        var tabela = $('#tableMostrar');
+                        var tr = $("<tr class='removeTr'>"); 
+                        tr.append("<td class='tableMostrarTd'>"+response[i].nome+"</td>");
+                        tr.append("<td class='tableMostrarTd acao' onClick='alterarCategoria("+response[i].id+")'><a><img class='icones' src='../../img/alterar.png'></a></td>");
+                        tr.append("<td class='tableMostrarTd acao' onClick='excluirCategoria("+response[i].id+")'><a><img class='icones' src='../../img/excluir.png'></a></td>");
+                        tabela.append(tr);
+                    }
+                },
+                error:function(){                   
+                    alert("Ocorreu algum problema");                    
+                },
+            });
+        }); 
+    }
+    function alterarCategoria(categoriaId){
+        window.location.href = "update.php?categoriaId="+categoriaId;  
+    }
+    function excluirCategoria(categoriaId){
+        var agree=confirm("deseja deletar esta categoria?");
+
+        if (agree){
+            $(document).ready(function(){
+
+                var nome = $('#nome').val();
+                
+                $.ajax({
+                    type:"post",
+                    url:'../../Controller/categoria/delete.php',
+                    dataType: 'JSON',
+                    async: true,
+                    data: {
+                        "categoriaId": categoriaId 
+                    },
+                    success:function(response){  
+                        console.log(response);
+                        populaTela();
+                    },
+                    error:function(){                   
+                        alert("Não foi possível excluir, tente mais tarde!");                    
+                    },
+                }); 
+            });
+        }
+    }
+</script>

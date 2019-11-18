@@ -1,38 +1,24 @@
 <?php
 	include('../../conexao/conexao.php');
 
-	$json = $_GET['json'];
-	$lista = json_decode($json, true);
-	
-	if(empty($lista)) {
-		$retorno['retorno'] = false;
-		$retorno['mensagem'] = 'Erro de formato no JSON!';
+	$id = $_POST['id'];
+	$nome = $_POST['nome'];	
+	$descricao = $_POST['duracao'];	
+	$produtoraId = $_POST['produtoraId'];
+	$lancamentoDate = $_POST['lancamentoDate'];	
 		
-		echo json_encode($retorno);
-		exit;
-	}
-	
-	foreach($lista as $item) {
+	$categoriaId = $_POST['categoriaId'];	
+	$gosteiId = @$_POST['gosteiId'];
 
-		$nome = $item['nome'];	
-		$descricao = $item['descricao'];	
-		$lancamentoDate = $item['lancamentoDate'];	
-		$proutoraId = $item['produtoraId'];	
-		$categoriaId = $item['categoriaId'];	
-		$gosteiId = $item['gosteiId'];
-
-		$sql = "UPDATE filme SET nome = '$nome', duracao = '$descricao', lancamentoDate = '$lancamentoDate', proutoraId = $produtoraId, categoriaId = $categoriaId, gostei_Id = $gosteiId  WHERE id = $id";
-		$query = mysqli_query($con, $sql);
-		if($query) {
-				header('Location: ../../views/filme/create.php?status=1');
-		} else {
-			//echo mysqli_error($query);
-			header('Location: ../../views/filme/create.php?status=2');
-		}	
-	}
+	$sql = "UPDATE filme SET NOME = '$nome', DURACAO = '$descricao', LANCAMENTODATE = '$lancamentoDate', PRODUTORAID = $produtoraId, CATEGORIAID = $categoriaId, GOSTEI_ID = $gosteiId  WHERE id = $id";
 	
-	$retorno['retorno'] = true;
-	$retorno['mensagem'] = 'Operação realizada com sucesso!';
+	$query = mysqli_query($con, $sql);
+	if($query) {
+			header('Location: ../../views/filme/create.php?status=1');
+	} else {
+		//echo mysqli_error($query);
+		header('Location: ../../views/filme/create.php?status=2');
+	}
 	
 	echo json_encode($retorno);
 	mysqli_close($con);

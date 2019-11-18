@@ -1,9 +1,9 @@
 <?php
 	include('../../conexao/conexao.php');
 
-	$id = $_GET['filmeId'];			
+	$id = $_POST['filmeId'];			
 	
-	$sql = "DELETE FROM filme WHERE id = $id";
+	$sql = "DELETE FROM filme WHERE ID = $id";
 	
 	$query = mysqli_query($con, $sql);
 	if($query) {

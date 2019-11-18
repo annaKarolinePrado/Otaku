@@ -32,11 +32,13 @@
                 <form  id="formPerfil" action="../../Controller/filme/update.php" method="POST">                    
                     <h1 id="titulo">Alterar Conta</h1>                
                     <input class="inputForm" name="id" type="hidden" value="<?php echo $item['ID']; ?>">
-                    <label for="nome"><b>Nome:</b></label>                
-                    <input class="inputForm" name="nome" type="text" placeholder="Nome:" required value="<?php echo $item['NOME']; ?>"><br>   
-                    <input class="inputForm" name="duracao" type="text" placeholder="DURACAO:" required value="<?php echo $item['DURACAO']; ?>"><br>   
-                    <input class="inputForm" name="lancamentoDate" type="text" placeholder="lançamento:" required value="<?php echo $item['LANCAMENTODATE']; ?>"><br>   
-
+                    <label for="nome"><b>Nome:</b></label>
+                    <input class="inputForm" name="nome" type="text" placeholder="" required value="<?php echo $item['NOME']; ?>"><br>   
+                    <label for="duracao"><b>Duração:</b></label>
+                    <input class="inputForm" name="duracao" type="text" placeholder="" required value="<?php echo $item['DURACAO']; ?>"><br>   
+                    <label for="lancamento"><b>Lançamento:</b></label>
+                    <input class="inputForm" name="lancamentoDate" type="text" placeholder="" required value="<?php echo $item['LANCAMENTODATE']; ?>"><br>   
+                    <label for="produtoraId"><b>Produtora:</b></label>
                     <select name="produtoraId" id=""> 
                         <?php
                             $sqlProdutora =  "SELECT * FROM produtora";
@@ -50,7 +52,7 @@
                             }
                         ?>                        
                     </select> 
-
+                    <label for="categoria"><b>Categoria:</b></label>
                     <select name="categoriaId" id=""> 
                         <?php
                             $sqlCartao =  "SELECT * FROM categoria";
@@ -64,7 +66,7 @@
                             }
                         ?>                        
                     </select>  
-
+                    <label for="gostei"><b>Gostei:</b></label>
                     <select name="gosteiId" id=""> 
                         <option value="1">Sim</option>
                         <option value="2">Não</option>                                              

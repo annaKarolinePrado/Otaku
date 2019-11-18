@@ -38,7 +38,7 @@
                             $sqlProdutora =  "SELECT * FROM produtora WHERE id=$idProdutora";
                             $queryProdutora = mysqli_query($con, $sqlProdutora);
                             while ($itemProdutora = mysqli_fetch_array($queryProdutora, MYSQLI_ASSOC)){
-                                $produtoraNome = $itemProdutora['nome'];
+                                $produtoraNome = @$itemProdutora['nome'];
                             }
                         ?>
                         <?php
@@ -46,11 +46,11 @@
                             $sqlCategoria =  "SELECT * FROM categoria WHERE id=$idCategoria";
                             $queryCategoria = mysqli_query($con, $sqlCategoria);
                             while ($itemCategoria = mysqli_fetch_array($queryCategoria, MYSQLI_ASSOC)){
-                                $categoriaNome = $itemCategoria['nome'];
+                                $categoriaNome = @$itemCategoria['nome'];
                             }
                         ?>                        
-                        <td class="tableMostrarTd"><?php echo $produtoraNome; ?></td>
-                        <td class="tableMostrarTd"><?php echo $categoriaNome; ?></td>
+                        <td class="tableMostrarTd"><?php echo @$produtoraNome; ?></td>
+                        <td class="tableMostrarTd"><?php echo @$categoriaNome; ?></td>
                         <td class="tableMostrarTd"><?php echo $item['GOSTEIID'] == 1?'Sim':'Não'; ?></td>
                         <td class="tableMostrarTd acao">
                             <a href="update.php?serieId=<?php echo $item['ID'] ?>">

@@ -60,7 +60,7 @@
                     <fieldset id="btns">
                         <button class="Botao" type="reset" >Linpar</button>
                         <button class="Botao Botao2" type="submit" >Enviar</button>
-                        <button class="Botao Botao2"><a href="pesquisar.php" >Pesquisar</a></button>
+                        <button class="Botao Botao2"><a href="listar.php" >Pesquisar</a></button>
                         
                     </fieldset>
                 </form>

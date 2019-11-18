@@ -1,7 +1,7 @@
 <?php
     include('../../conexao/validar.php');
     include('../../conexao/conexao.php');
-    $nome = $_POST['duracao'];
+    $nome = @$_POST['duracao'];
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -86,8 +86,8 @@
                         tr.append("<td class='tableMostrarTd'>"+response[i].NOME+"</td>");
                         tr.append("<td class='tableMostrarTd'>"+response[i].DURACAO+"</td>");
                         tr.append("<td class='tableMostrarTd'>"+response[i].LANCAMENTODATE+"</td>");
-                        tr.append("<td class='tableMostrarTd acao' onClick='alterar("+response[i].id+")'><a><img class='icones' src='../../img/alterar.png'></a></td>");
-                        tr.append("<td class='tableMostrarTd acao' onClick='excluir("+response[i].id+")'><a><img class='icones' src='../../img/excluir.png'></a></td>");
+                        tr.append("<td class='tableMostrarTd acao' onClick='alterar("+response[i].ID+")'><a><img class='icones' src='../../img/alterar.png'></a></td>");
+                        tr.append("<td class='tableMostrarTd acao' onClick='excluir("+response[i].ID+")'><a><img class='icones' src='../../img/excluir.png'></a></td>");
                         tabela.append(tr);
                     }
                 },
@@ -100,17 +100,14 @@
     function alterar(id){
         window.location.href = "update.php?filmeId="+id;  
     }
-    function exclui(id){
+    function excluir(id){
         var agree=confirm("deseja deletar este registro?");
 
         if (agree){
-            $(document).ready(function(){
-
-                var nome = $('#nome').val();
-                
+            $(document).ready(function(){                
                 $.ajax({
                     type:"post",
-                    url:'../../Controller/categoria/delete.php',
+                    url:'../../Controller/filme/delete.php',
                     dataType: 'JSON',
                     async: true,
                     data: {
@@ -118,7 +115,7 @@
                     },
                     success:function(response){  
                         console.log(response);
-                        populaTela();
+                        pesquisarFilme();
                     },
                     error:function(){                   
                         alert("Não foi possível excluir, tente mais tarde!");                    

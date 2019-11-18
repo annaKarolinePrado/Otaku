@@ -33,6 +33,7 @@
                     <label for="nome"><b>Nome:</b></label> 
                     <input class="inputForm" name="nome" type="text"  required value="<?php echo $item['NOME']; ?>">
                     <label for="temporadaId"><b>Temporada:</b></label>
+                    <select name="temporadaId" id="temporadaId"> </select> 
                     <fieldset id="btns">
                         <button class="Botao" type="reset" >Limpar</button>
                         <button class="Botao Botao2" type="submit" >Alterar</button>
@@ -46,9 +47,7 @@
         <?php include '../rodape.php'; ?>	
     </footer>
 </html>
-<?php
-	mysqli_close($con);
-?>
+
 <script  type="text/javascript" >
     window.onload = function(){
         carregaTemporada();
@@ -64,12 +63,12 @@
                 data: "{}",
                 success:function(response){  
                     console.log(response);
-                    var combo = $('#temporadaId');
+                    var combo = $("#temporadaId");
                     $(".remove").each(function() {
                         $(this).remove();
                     });
                     for(var i = 0; i < response.length; i++){                       
-                        combo.append("<option class='remove' value='"+response[i].id"'>"+response[i].nome+"</option>");
+                        combo.append("<option class='remove' value='"+response[i].id+"'>"+response[i].NOME+"</option>");
                     }
                 },
                 error:function(){                   
@@ -79,3 +78,6 @@
         }); 
     }
 </script>
+<?php
+	mysqli_close($con);
+?>

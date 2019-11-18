@@ -35,22 +35,12 @@
                     <input class="inputForm" name="id" type="hidden" value="<?php echo $item['ID']; ?>">
 
 
-                    <select name="planoId" id=""> 
+                    <select name="planoId" id="planoId"> 
                                               
                     </select> 
 
-                    <select name="cartaoId" id=""> 
-                        <?php
-                            $sqlCartao =  "SELECT * FROM cartao";
-                            $queryCartao = mysqli_query($con, $sqlCartao);
-                            while ($itemCartao = mysqli_fetch_array($queryCartao, MYSQLI_ASSOC)){
-                        ?>
-                        <option value="<?php echo $itemCartao['id']?>" <?php echo $itemCartao['id']==$cartao?'selected':"";?> ?>
-                            <?php echo $itemCartao['titular']?>
-                        </option>
-                        <?php 
-                            }
-                        ?>                        
+                    <select name="cartaoId" id="cartaoId"> 
+                                         
                     </select>  
                      <fieldset id="btns">
                         <button class="Botao" type="reset" >Limpar</button>
@@ -71,6 +61,7 @@
 <script  type="text/javascript" >
     window.onload = function(){
         carregaPlano();
+        carregaCartao();
     } 
     function carregaPlano(){
         $(document).ready(function(){
@@ -83,11 +74,11 @@
                 success:function(response){  
                     console.log(response);
                     var combo = $('#planoId');
-                    $(".remove").each(function() {
+                    $(".removePlano").each(function() {
                         $(this).remove();
                     });
                     for(var i = 0; i < response.length; i++){                       
-                        combo.append("<option class='remove' value='"+response[i].id"'>"+response[i].nome+"</option>");
+                        combo.append("<option class='removePlano' value='"+response[i].id+"'>"+response[i].descricao+"</option>");
                     }
                 },
                 error:function(){                   
@@ -107,11 +98,11 @@
                 success:function(response){  
                     console.log(response);
                     var combo = $('#cartaoId');
-                    $(".remove").each(function() {
+                    $(".removeCartao").each(function() {
                         $(this).remove();
                     });
                     for(var i = 0; i < response.length; i++){                       
-                        combo.append("<option class='remove' value='"+response[i].id"'>"+response[i].nome+"</option>");
+                        combo.append("<option class='removeCartao' value='"+response[i].id+"'>"+response[i].titular+"</option>");
                     }
                 },
                 error:function(){                   
